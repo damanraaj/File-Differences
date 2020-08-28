@@ -49,8 +49,11 @@ def singleline_diff_format(line1, line2, idx):
 
       If idx is not a valid index, then returns an empty string.
     """
-    if '\n' in line1+line2 or '\r' in line1+line2 or idx > min(len(line1), len(line2)) or idx < 0:
+    if idx > min(len(line1), len(line2)) or idx < 0:
         return ""
+    for char in line1+line2:
+        if char in ('\n','\r'):
+            return ""
     
     output = line1+'\n'
     output += '='*idx + '^\n'
